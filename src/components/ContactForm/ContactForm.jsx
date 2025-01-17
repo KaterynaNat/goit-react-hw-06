@@ -1,6 +1,8 @@
-import { Formik, Form } from "formik";
+import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import styles from "./ContactForm.module.css";
+
+// Redux
 import { useDispatch, useSelector } from "react-redux";
 import { addContact } from "../../redux/contactsSlice";
 import { selectContacts } from "../../redux/selectors";
@@ -51,26 +53,38 @@ const ContactForm = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ values, handleChange, handleBlur }) => (
+        {({ errors, touched }) => (
           <Form className={styles.form}>
-            <input
-              type="text"
-              name="name"
-              placeholder="Enter name"
-              value={values.name}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className={styles.input}
-            />
-            <input
-              type="text"
-              name="number"
-              placeholder="Enter phone number"
-              value={values.number}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className={styles.input}
-            />
+            <div className={styles.fieldContainer}>
+              <Field
+                type="text"
+                name="name"
+                placeholder="Enter name"
+                className={`${styles.input} ${
+                  errors.name && touched.name ? styles.inputError : ""
+                }`}
+              />
+              {}
+              {errors.name && touched.name && (
+                <div className={styles.error}>{errors.name}</div>
+              )}
+            </div>
+
+            <div className={styles.fieldContainer}>
+              <Field
+                type="text"
+                name="number"
+                placeholder="Enter phone number"
+                className={`${styles.input} ${
+                  errors.number && touched.number ? styles.inputError : ""
+                }`}
+              />
+              {}
+              {errors.number && touched.number && (
+                <div className={styles.error}>{errors.number}</div>
+              )}
+            </div>
+
             <button type="submit" className={styles.submitButton}>
               Add Contact
             </button>

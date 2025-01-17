@@ -14,10 +14,11 @@ body {
   font-family: "Poppins", sans-serif;
   background-color: #f9eef8;
   color: #5d3f44;
+  margin: 0;
   padding: 20px;
-  width: 1000px;
-  margin: 0 auto;
+  text-align: center;
 }
+
 h1,
 h2,
 h3,
@@ -28,9 +29,14 @@ p {
   margin-top: 0;
   margin-bottom: 0;
 }
+
 a {
   text-decoration: none;
   display: block;
+  color: #f8b7d1;
+}
+a:hover {
+  color: #ffacc8;
 }
 
 img {
@@ -64,13 +70,4 @@ h2 {
   font-size: 24px;
   color: #f7a1c3;
   text-align: center;
-}
-
-a {
-  color: #f8b7d1;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #ffacc8;
 }

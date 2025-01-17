@@ -15,7 +15,7 @@ import contactsReducer from "./contactsSlice";
 import filtersReducer from "./filtersSlice";
 
 const contactsPersistConfig = {
-  key: "contacts",
+  key: "myContacts",
   storage,
   whitelist: ["items"],
 };
