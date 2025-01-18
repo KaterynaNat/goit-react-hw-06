@@ -7,17 +7,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { addContact } from "../../redux/contactsSlice";
 import { selectContacts } from "../../redux/selectors";
 
-const phoneRegex = /^[\d\s+\-()]*$/;
+const nameRegex = /^[A-Za-z ]+$/;
+const phoneRegex = /^\+[1-9]\d{7,14}$/;
 
 const validationSchema = Yup.object({
   name: Yup.string()
+    .matches(nameRegex, "Name must contain only latin letters")
     .min(3, "Name must be at least 3 characters")
     .max(50, "Name must not exceed 50 characters")
     .required("Please enter data"),
   number: Yup.string()
     .matches(
       phoneRegex,
-      "Phone number can only contain numbers and +, -, (), spaces."
+      "Phone number must be in international format, e.g. +380501234567"
     )
     .required("Please enter data"),
 });
@@ -59,12 +61,11 @@ const ContactForm = () => {
               <Field
                 type="text"
                 name="name"
-                placeholder="Enter name"
+                placeholder="Enter name (latin letters only)"
                 className={`${styles.input} ${
                   errors.name && touched.name ? styles.inputError : ""
                 }`}
               />
-              {}
               {errors.name && touched.name && (
                 <div className={styles.error}>{errors.name}</div>
               )}
@@ -74,12 +75,11 @@ const ContactForm = () => {
               <Field
                 type="text"
                 name="number"
-                placeholder="Enter phone number"
+                placeholder="Enter phone number, e.g. +380501234567"
                 className={`${styles.input} ${
                   errors.number && touched.number ? styles.inputError : ""
                 }`}
               />
-              {}
               {errors.number && touched.number && (
                 <div className={styles.error}>{errors.number}</div>
               )}
